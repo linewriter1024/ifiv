@@ -95,7 +95,9 @@ window.onload = function() {
 				graph.addLink("flow:" + flow, "industry:" + ydata.flows[flow].demander);
 			}
 
-			var renderer = Viva.Graph.View.renderer(graph, {graphics: graphics});
+			var renderer = Viva.Graph.View.renderer(graph, {
+				graphics: graphics
+			});
 			renderer.run();
 		}
 	});
