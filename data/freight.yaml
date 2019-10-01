@@ -1,0 +1,11 @@
+coal:
+    name: Coal
+
+coke:
+    name: Coke
+
+iron ore:
+    name: Iron Ore
+
+steel:
+    name: Steel

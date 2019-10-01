@@ -1,0 +1,24 @@
+coal mine:
+    name: Coal Mine
+    outputs:
+        - coal
+
+coke plant:
+    name: Coke Plant
+    inputs:
+        - coal
+    outputs:
+        - coke
+
+iron mine:
+    name: Iron Mine
+    outputs:
+        - iron ore
+
+steel mill:
+    name: Steel Mill
+    inputs:
+        - iron ore
+        - coke
+    outputs:
+        - steel
