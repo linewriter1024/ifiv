@@ -1,11 +1,22 @@
 coal:
     name: Coal
+    transport:
+        - rail
+        - water
 
 coke:
     name: Coke
+    transport:
+        - rail
+        - water
 
 iron ore:
     name: Iron Ore
+    transport:
+        - rail
+        - water
 
 steel:
     name: Steel
+    transport:
+        - rail
