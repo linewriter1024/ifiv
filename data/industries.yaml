@@ -10,15 +10,29 @@ coke plant:
     outputs:
         - coke
 
+construction:
+    name: Construction
+    inputs:
+        - paint
+        - steel
+    outputs:
+        - recycled steel
+
 iron mine:
     name: Iron Mine
     outputs:
         - iron ore
+
+paint plant:
+    name: Paint Plant
+    outputs:
+        - paint
 
 steel mill:
     name: Steel Mill
     inputs:
         - iron ore
         - coke
+        - recycled steel
     outputs:
         - steel

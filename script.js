@@ -57,22 +57,28 @@ window.onload = function() {
 
 			var graphics = Viva.Graph.View.svgGraphics();
 			graphics.node(function(node) {
-				return Viva.Graph.svg('text')
-						.text(node.data.text);
+				return Viva.Graph.svg('text').text(node.data.text);
 			})
 
 			// Construct and finalize all flow data.
+			// For all possible suppliers...
 			for(var supplier in ydata.industries) {
+				// For all outputs of this supplier...
 				for(const freight of (ydata.industries[supplier].outputs || [])) {
+					// For all possible demanders...
 					for(var demander in ydata.industries) {
 						if(demander != supplier) {
+							// If this demander takes some of the supplier's supply, then construct the flow.
 							if((ydata.industries[demander].inputs || []).includes(freight)) {
 								var index = supplier + ";" + freight + ";" + demander;
+								// Create flow and override with any existing flow definition.
 								ydata.flows[index] = Object.assign({}, {
+									// Set flow information contained in index.
 									freight: freight,
-									transport: ydata.freight[freight].transport,
 									supplier: supplier,
 									demander: demander,
+									// Default transport to value in freight definition.
+									transport: ydata.freight[freight].transport,
 								}, ydata.flows[index] || {});
 							}
 						}
@@ -80,6 +86,7 @@ window.onload = function() {
 				}
 			}
 
+			// Add industry nodes.
 			for(var industry in ydata.industries) {
 				graph.addNode("industry:" + industry, {
 					text: ydata.industries[industry].name,

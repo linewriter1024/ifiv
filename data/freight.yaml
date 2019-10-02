@@ -16,7 +16,17 @@ iron ore:
         - rail
         - water
 
+paint:
+    name: Paint
+    transport:
+        - road
+
 steel:
     name: Steel
     transport:
         - rail
+
+recycled steel:
+    name: Recyled Steel
+    transport:
+        - road

@@ -1,5 +1,8 @@
 rail:
     name: Rail
 
+road:
+    name: Road
+
 water:
     name: Water
