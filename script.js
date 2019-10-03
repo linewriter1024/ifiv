@@ -31,7 +31,8 @@ function error(reason) {
 	if(!errored) {
 		errored = true;
 		errorReason = reason;
-		alert(errorReason);
+		// Display the error message.
+		$("#error").text(errorReason);
 	}
 }
 
@@ -67,20 +68,18 @@ window.onload = function() {
 				for(const freight of (ydata.industries[supplier].outputs || [])) {
 					// For all possible demanders...
 					for(var demander in ydata.industries) {
-						if(demander != supplier) {
-							// If this demander takes some of the supplier's supply, then construct the flow.
-							if((ydata.industries[demander].inputs || []).includes(freight)) {
-								var index = supplier + ";" + freight + ";" + demander;
-								// Create flow and override with any existing flow definition.
-								ydata.flows[index] = Object.assign({}, {
-									// Set flow information contained in index.
-									freight: freight,
-									supplier: supplier,
-									demander: demander,
-									// Default transport to value in freight definition.
-									transport: ydata.freight[freight].transport,
-								}, ydata.flows[index] || {});
-							}
+						// If this demander takes some of the supplier's supply, then construct the flow.
+						if((ydata.industries[demander].inputs || []).includes(freight)) {
+							var index = supplier + ";" + freight + ";" + demander;
+							// Create flow and override with any existing flow definition.
+							ydata.flows[index] = Object.assign({}, {
+								// Set flow information contained in index.
+								freight: freight,
+								supplier: supplier,
+								demander: demander,
+								// Default transport to value in freight definition.
+								transport: ydata.freight[freight].transport,
+							}, ydata.flows[index] || {});
 						}
 					}
 				}
