@@ -49,6 +49,10 @@ for(const type of ["industries", "flows", "transports", "freight"]) {
 	}))
 }
 
+function nodeIndex(type, name) {
+	return type + ":" + name;
+}
+
 // Data ready.
 window.onload = function() {
 	$.when.apply($, promises).then(function() {
@@ -87,18 +91,18 @@ window.onload = function() {
 
 			// Add industry nodes.
 			for(var industry in ydata.industries) {
-				graph.addNode("industry:" + industry, {
+				graph.addNode(nodeIndex("industry", industry), {
 					text: ydata.industries[industry].name,
 				});
 			}
 
 			for(var flow in ydata.flows) {
-				graph.addNode("flow:" + flow, {
+				graph.addNode(nodeIndex("flow", flow), {
 					text: ydata.freight[ydata.flows[flow].freight].name + " - " + ydata.flows[flow].transport.map(transport => ydata.transports[transport].name).join(", "),
 				});
 
-				graph.addLink("industry:" + ydata.flows[flow].supplier, "flow:" + flow);
-				graph.addLink("flow:" + flow, "industry:" + ydata.flows[flow].demander);
+				graph.addLink(nodeIndex("industry", ydata.flows[flow].supplier), nodeIndex("flow", flow));
+				graph.addLink(nodeIndex("flow", flow), nodeIndex("industry", ydata.flows[flow].demander));
 			}
 
 			var renderer = Viva.Graph.View.renderer(graph, {
