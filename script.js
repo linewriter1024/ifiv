@@ -42,7 +42,7 @@ var ydata = {};
 // Begin downloading all YAML data.
 var promises = [];
 for(const type of ["industries", "flows", "transports", "freight"]) {
-	promises.push(readYAML("/data/" + type + ".yaml", function(data) {
+	promises.push(readYAML("data/" + type + ".yaml", function(data) {
 		ydata[type] = data || {};
 	}, function(status) {
 		error("Unable to load " + type + " database due to error: " + status);
