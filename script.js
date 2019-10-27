@@ -77,9 +77,11 @@ window.onload = function() {
 				.attr("markerUnits", "strokeWidth")
 				.attr("markerWidth", "20")
 				.attr("markerHeight", "10")
+				.attr("fill-opacity", "0")
+				.attr("stroke", "#000")
 				.attr("orient", "auto");
 
-			marker.append("path").attr("d", "M 0 0 L 10 5 L 0 10 z").attr("fill", "#F00");
+			marker.append("path").attr("d", "M 0 0 L 10 5 L 0 10 z");
 
 			var defs = graphics.getSvgRoot().append("defs");
 			defs.append(marker);
