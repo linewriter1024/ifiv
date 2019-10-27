@@ -18,3 +18,13 @@ a.button {
 	text-decoration: none;
 	padding: 0.2em 0.2em 0.2em 0.2em;
 }
+
+.node {}
+
+.node-industry {
+	font-weight: bold;
+}
+
+.node-flow {
+	font-style: italic;
+}

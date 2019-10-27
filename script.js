@@ -63,10 +63,10 @@ window.onload = function() {
 
 			var graphics = Viva.Graph.View.svgGraphics();
 			graphics.node(function(node) {
-				return Viva.Graph.svg('text').text(node.data.text);
+				return Viva.Graph.svg("text").text(node.data.text).attr("class", "node node-" + (node.data.type || "other"));
 			}).placeNode(function(nodeUI, pos) {
 				var box = nodeUI.getBBox();
-                nodeUI.attr('x', pos.x - box.width / 2).attr('y', pos.y);
+                nodeUI.attr("x", pos.x - box.width / 2).attr("y", pos.y);
             });
 
 			var marker = Viva.Graph.svg("marker")
@@ -89,13 +89,15 @@ window.onload = function() {
 						.attr("stroke", "gray")
 						.attr("marker-end", "url(#triangle)");
 			}).placeLink(function(linkUI, fromPos, toPos) {
-				var fromBox = graphics.getNodeUI(linkUI.link.fromId).getBBox();
-				var toBox = graphics.getNodeUI(linkUI.link.toId).getBBox();
+				var fromUI = graphics.getNodeUI(linkUI.link.fromId);
+				var toUI = graphics.getNodeUI(linkUI.link.toId);
+				var fromBox = fromUI.getBBox();
+				var toBox = toUI.getBBox();
 
-				fromPos = geom.intersectRect(fromBox.x - fromBox.width / 2, fromBox.y - fromBox.height, fromBox.x + fromBox.width / 2, fromBox.y, fromPos.x, fromPos.y, toPos.x, toPos.y) || fromPos;
-				toPos = geom.intersectRect(toBox.x - toBox.width / 2, toBox.y - toBox.height, toBox.x + toBox.width / 2, toBox.y, fromPos.x, fromPos.y, toPos.x, toPos.y) || toPos;
+				var finalFrom = geom.intersectRect(fromPos.x - fromBox.width / 2, fromPos.y - fromBox.height / 2, fromPos.x + fromBox.width / 2, fromPos.y + fromBox.height / 2, fromPos.x, fromPos.y, toPos.x, toPos.y) || fromPos;
+				var finalTo = geom.intersectRect(toPos.x - toBox.width / 2, toPos.y - toBox.height / 2, toPos.x + toBox.width / 2, toPos.y + toBox.height / 2, fromPos.x, fromPos.y, toPos.x, toPos.y) || toPos;
 
-				linkUI.attr("d", "M" + fromPos.x + "," + fromPos.y + "L" + toPos.x + "," + toPos.y);
+				linkUI.attr("d", "M" + finalFrom.x + "," + finalFrom.y + "L" + finalTo.x + "," + finalTo.y);
 			});
 
 			// Construct and finalize all flow data.
@@ -126,12 +128,14 @@ window.onload = function() {
 			for(var industry in ydata.industries) {
 				graph.addNode(nodeIndex("industry", industry), {
 					text: ydata.industries[industry].name,
+					type: "industry",
 				});
 			}
 
 			for(var flow in ydata.flows) {
 				graph.addNode(nodeIndex("flow", flow), {
 					text: ydata.freight[ydata.flows[flow].freight].name,
+					type: "flow",
 				});
 
 				graph.addLink(nodeIndex("industry", ydata.flows[flow].supplier), nodeIndex("flow", flow));
@@ -140,6 +144,11 @@ window.onload = function() {
 
 			var renderer = Viva.Graph.View.renderer(graph, {
 				graphics: graphics,
+				layout: Viva.Graph.Layout.forceDirected(graph, {
+					springLength: 100,
+					springCoeff: 0.0002,
+					gravity: -5,
+				}),
 			});
 			renderer.run();
 		}
