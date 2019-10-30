@@ -21,6 +21,10 @@ a.button {
 
 .node {}
 
+.node:hover {
+	cursor: pointer;
+}
+
 .node-industry {
 	font-weight: bold;
 }
