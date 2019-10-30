@@ -63,12 +63,29 @@ window.onload = function() {
 
 			var graphics = Viva.Graph.View.svgGraphics();
 			graphics.node(function(node) {
-				return Viva.Graph.svg("text").text(node.data.text).attr("class", "node node-" + (node.data.type || "other"));
+				var text = Viva.Graph.svg("text")
+					.text(node.data.text)
+					.attr("class", "node node-" + (node.data.type || "other"))
+					.attr("pointer-events", "visiblePoint");
+				// Node information modal.
+				$(text).on("mousedown", function(edown) {
+					$(text).on("mouseup mousemove", function handler(eup) {
+						if (eup.type === "mouseup" && Math.abs(edown.pageX - eup.pageX) < 5 && Math.abs(edown.pageY - eup.pageY) < 5) {
+							window.location.hash = "#" + node.data.index;
+							$("#nodeinfo").empty();
+							$("#nodeinfo").append($("<p/>").text(node.data.text));
+							$("#nodeinfo").modal();
+						}
+						$(text).off("mouseup mousemove", handler);
+					});
+				});
+				return text;
 			}).placeNode(function(nodeUI, pos) {
 				var box = nodeUI.getBBox();
                 nodeUI.attr("x", pos.x - box.width / 2).attr("y", pos.y);
             });
 
+			// Triangle/arrow marker.
 			var marker = Viva.Graph.svg("marker")
 				.attr("id", "triangle")
 				.attr("viewBox", "0 0 10 10")
@@ -80,12 +97,12 @@ window.onload = function() {
 				.attr("fill-opacity", "0")
 				.attr("stroke", "#000")
 				.attr("orient", "auto");
-
 			marker.append("path").attr("d", "M 0 0 L 10 5 L 0 10 z");
 
 			var defs = graphics.getSvgRoot().append("defs");
 			defs.append(marker);
 
+			// Directional link with arrow at end.
 			graphics.link(function(link) {
 				return Viva.Graph.svg("path")
 						.attr("stroke", "gray")
@@ -129,13 +146,16 @@ window.onload = function() {
 			// Add industry nodes.
 			for(var industry in ydata.industries) {
 				graph.addNode(nodeIndex("industry", industry), {
+					index: nodeIndex("industry", industry),
 					text: ydata.industries[industry].name,
 					type: "industry",
 				});
 			}
 
+			// Add flow nodes and links.
 			for(var flow in ydata.flows) {
 				graph.addNode(nodeIndex("flow", flow), {
+					index: nodeIndex("flow", flow),
 					text: ydata.freight[ydata.flows[flow].freight].name,
 					type: "flow",
 				});
