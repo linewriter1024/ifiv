@@ -32,3 +32,7 @@ a.button {
 .node-flow {
 	font-style: italic;
 }
+
+.display-title {
+	font-weight: bold;
+}

@@ -53,6 +53,25 @@ function nodeIndex(type, name) {
 	return type + ":" + name;
 }
 
+var nodes = {};
+
+window.onhashchange = function() {
+	var index = decodeURI(window.location.hash.split("#")[1] || "");
+	// Reset dialog.
+	$.modal.close();
+	$("#nodeinfo").empty();
+	if(index in nodes) {
+		var node = nodes[index];
+		$("#nodeinfo").append(node.data.display);
+		// Display dialog.
+		$("#nodeinfo").modal();
+	}
+}
+
+$(document).on($.modal.CLOSE, function() {
+	window.location.hash = "";
+});
+
 // Data ready.
 window.onload = function() {
 	$.when.apply($, promises).then(function() {
@@ -67,18 +86,15 @@ window.onload = function() {
 					.text(node.data.text)
 					.attr("class", "node node-" + (node.data.type || "other"))
 					.attr("pointer-events", "visiblePoint");
-				// Node information modal.
 				$(text).on("mousedown", function(edown) {
 					$(text).on("mouseup mousemove", function handler(eup) {
 						if (eup.type === "mouseup" && Math.abs(edown.pageX - eup.pageX) < 5 && Math.abs(edown.pageY - eup.pageY) < 5) {
 							window.location.hash = "#" + node.data.index;
-							$("#nodeinfo").empty();
-							$("#nodeinfo").append($("<p/>").text(node.data.text));
-							$("#nodeinfo").modal();
 						}
 						$(text).off("mouseup mousemove", handler);
 					});
 				});
+				nodes[node.data.index] = node;
 				return text;
 			}).placeNode(function(nodeUI, pos) {
 				var box = nodeUI.getBBox();
@@ -149,6 +165,7 @@ window.onload = function() {
 					index: nodeIndex("industry", industry),
 					text: ydata.industries[industry].name,
 					type: "industry",
+					display: $("<div/>").attr("class", "display display-industry").append($("<span/>").attr("class", "display-title").text(ydata.industries[industry].name)),
 				});
 			}
 
@@ -173,6 +190,10 @@ window.onload = function() {
 				}),
 			});
 			renderer.run();
+
+			if(window.location.hash) {
+				$(window).trigger("hashchange");
+			}
 		}
 	});
 };
