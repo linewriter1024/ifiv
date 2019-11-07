@@ -238,7 +238,11 @@ window.onload = function() {
 					index: nodeIndex("industry", industry),
 					text: idata.name,
 					type: "industry",
-					display: $("<div/>").attr("class", "display display-industry").append($("<a/>").attr("href", idata.wikipedia ? ("https://en.wikipedia.org/wiki/" + encodeURI(idata.wikipedia)) : null).attr("class", "display-title").text(idata.name)).append(inputs).append(outputs).append(elemCites(idata.cite || [])),
+					display: $("<div/>").attr("class", "display display-industry")
+						.append($("<a/>").attr("href", idata.wikipedia ? ("https://en.wikipedia.org/wiki/" + encodeURI(idata.wikipedia)) : null).attr("class", "display-title").text(idata.name))
+						.append(idata.blurb ? $("<p/>").text(idata.blurb).linkify() : null)
+						.append(inputs).append(outputs)
+						.append(elemCites(idata.cite || [])),
 				});
 			}
 
@@ -250,7 +254,9 @@ window.onload = function() {
 					index: nodeIndex("flow", flow),
 					text: freightdata.name,
 					type: "flow",
-					display: $("<div/>").attr("class", "display display-flow").append($("<a/>").attr("href", freightdata.wikipedia ? ("https://en.wikipedia.org/wiki/" + encodeURI(freightdata.wikipedia)) : null).attr("class", "display-title").text(freightdata.name))
+					display: $("<div/>").attr("class", "display display-flow").append($("<span/>").text("Freight: ")).append($("<a/>").attr("href", freightdata.wikipedia ? ("https://en.wikipedia.org/wiki/" + encodeURI(freightdata.wikipedia)) : null).attr("class", "display-title").text(freightdata.name))
+						.append(freightdata.blurb ? $("<p/>").text(freightdata.blurb).linkify() : null)
+						.append(freightdata.blurb ? $("<p/>").text(flowdata.blurb).linkify() : null)
 						.append($("<p/>")
 							.append($("<span/>").text("From "))
 							.append($("<a/>").text(ydata.industries[flowdata.supplier].name).attr("href", "#" + nodeIndex("industry", flowdata.supplier)))

@@ -30,6 +30,7 @@ paint:
 
 steel:
     name: Steel
+    blurb: Steel is an extremely common material, used in all manner of manufacturing and construction.
     wikipedia: Steel
     cite:
         - state of ohio rail plan
@@ -38,6 +39,9 @@ steel:
 
 recycled steel:
     name: Recyled Steel
+    blurb: Old steel can be taken, scrapped, and recycled within steel mills. This process is very efficient.
+    cite:
+        - about steel
     wikipedia: "Steel#Recycling"
     transport:
         - road
