@@ -1,12 +1,18 @@
 coal mine:
     name: Coal Mine
+    blurb: A setup to extract coal from the ground. It may be a mine positioned on the surface or extending deep underground.
+    wikipedia: Coal mine
+    cite:
+        - coal mining
     outputs:
         - coal
 
 coke plant:
-    name: Coke Plant
+    name: Coke Battery
+    blurb: An array of ovens that remove impurities from coal to produce coke.
     cite:
         - about steel
+        - how is steel produced
     inputs:
         - coal
     outputs:
@@ -14,6 +20,8 @@ coke plant:
 
 construction:
     name: Construction
+    blurb: Construction projects of various kinds require various materials. Old construction may be dismantled and some materials recycled.
+    wikipedia: Construction
     inputs:
         - paint
         - steel
@@ -35,6 +43,7 @@ paint plant:
 
 steel mill:
     name: Steel Mill
+    blurb: Steel mills convert iron ore to usable steel. They may also recycle scrap steel.
     wikipedia: Steel mill
     cite:
         - about steel

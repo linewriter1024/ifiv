@@ -1,23 +1,31 @@
 coal:
     name: Coal
+    blurb: Coal is a energy-rich material found underground. It was produced from the decomposition of ancient vegetation.
     wikipedia: Coal
+    cite:
+        - how is steel produced
+        - what is coal
     transport:
         - rail
         - water
 
 coke:
     name: Coke
+    blurb: Coke is a fuel derived from coal, almost entirely pure carbon. Its primary use is in metallurgy.
     wikipedia: Coke (fuel)
     cite:
         - state of ohio rail plan
+        - how is steel produced
     transport:
         - rail
         - water
 
 iron ore:
     name: Iron Ore
+    blurb: Iron ore is a metal found in earth's crust. It is primarily used in steel-making.
     wikipedia: Iron ore
     cite:
+        - how is steel produced
         - state of ohio rail plan
     transport:
         - rail

@@ -89,11 +89,11 @@ function elemCites(sources) {
 	var sources = sources.slice();
 	sources.sort();
 	if(sources.length > 0) {
-		var list = $("<ul/>").attr("class", "citelist");
+		var list = $("<ul/>").attr("class", "citelist").hide();
 		for(const source of sources.filter((v, i, a) => a.indexOf(v) === i)) {
 			list.append($("<li/>").append(elemCite(source)));
 		}
-		return $("<p/>").append($("<span/>").attr("class", "info-section-header").text("Citations")).append(list);
+		return $("<p/>").append($("<a/>").attr("class", "info-section-header citelist-toggle").attr("href", "javascript:void(0)").attr("title", "Expand the reference list").text("[References]")).append(list);
 	}
 	return $("<span/>");
 }
@@ -281,10 +281,23 @@ window.onload = function() {
 			});
 			renderer.run();
 
+			$("#about").append($("<p/>").text("Statistics: " +
+				[
+					Object.keys(ydata.industries).length + " industries",
+					Object.keys(ydata.freight).length + " freight types",
+					Object.keys(ydata.flows).length + " connections",
+					Object.keys(ydata.sources).length + " references",
+				].join(", ").replace(/, ([^,]*)$/, ', and $1')
+			));
+
 			// Activate hash system on page (re-)load.
 			if(window.location.hash) {
 				$(window).trigger("hashchange");
 			}
+
+			$("body").on("click", ".citelist-toggle", function() {
+				$(".citelist").slideToggle("fast");
+			});
 		}
 	});
 };
