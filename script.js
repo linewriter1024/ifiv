@@ -66,11 +66,31 @@ window.onhashchange = function() {
 		// Display dialog.
 		$("#nodeinfo").modal();
 	}
+	else if(index == "about") {
+		$("#about").modal();
+	}
 }
 
 $(document).on($.modal.CLOSE, function() {
-	window.location.hash = "";
+	window.history.back();
 });
+
+function elemCite(source) {
+	return $("<cite/>").text(ydata.sources[source].cite).linkify();
+}
+
+function elemCites(sources) {
+	var sources = sources.slice();
+	sources.sort();
+	if(sources.length > 0) {
+		var list = $("<ul/>").attr("class", "citelist");
+		for(const source of sources.filter((v, i, a) => a.indexOf(v) === i)) {
+			list.append($("<li/>").append(elemCite(source)));
+		}
+		return list;
+	}
+	return $("<span/>");
+}
 
 // Data ready.
 window.onload = function() {
@@ -154,6 +174,9 @@ window.onload = function() {
 								// Default transport to value in freight definition.
 								transport: ydata.freight[freight].transport,
 							}, ydata.flows[index] || {});
+
+							// Combined citation from freight and flow.
+							ydata.flows[index].cite = (ydata.freight[freight].cite || []).concat(ydata.flows[index].cite || []);
 						}
 					}
 				}
@@ -161,20 +184,24 @@ window.onload = function() {
 
 			// Add industry nodes.
 			for(var industry in ydata.industries) {
+				var idata = ydata.industries[industry];
 				graph.addNode(nodeIndex("industry", industry), {
 					index: nodeIndex("industry", industry),
-					text: ydata.industries[industry].name,
+					text: idata.name,
 					type: "industry",
-					display: $("<div/>").attr("class", "display display-industry").append($("<span/>").attr("class", "display-title").text(ydata.industries[industry].name)),
+					display: $("<div/>").attr("class", "display display-industry").append($("<span/>").attr("class", "display-title").text(idata.name)).append(elemCites(idata.cite || [])),
 				});
 			}
 
 			// Add flow nodes and links.
 			for(var flow in ydata.flows) {
+				var flowdata = ydata.flows[flow];
+				var freightdata = ydata.freight[flowdata.freight];
 				graph.addNode(nodeIndex("flow", flow), {
 					index: nodeIndex("flow", flow),
-					text: ydata.freight[ydata.flows[flow].freight].name,
+					text: freightdata.name,
 					type: "flow",
+					display: $("<div/>").attr("class", "display display-flow").append($("<span/>").attr("class", "display-title").text(freightdata.name)).append(elemCites(flowdata.cite || [])),
 				});
 
 				graph.addLink(nodeIndex("industry", ydata.flows[flow].supplier), nodeIndex("flow", flow));
@@ -191,6 +218,7 @@ window.onload = function() {
 			});
 			renderer.run();
 
+			// Activate hash system on page (re-)load.
 			if(window.location.hash) {
 				$(window).trigger("hashchange");
 			}

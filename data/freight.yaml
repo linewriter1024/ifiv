@@ -1,17 +1,24 @@
 coal:
     name: Coal
+    wikipedia: Coal
     transport:
         - rail
         - water
 
 coke:
     name: Coke
+    wikipedia: Coke (fuel)
+    cite:
+        - state of ohio rail plan
     transport:
         - rail
         - water
 
 iron ore:
     name: Iron Ore
+    wikipedia: Iron ore
+    cite:
+        - state of ohio rail plan
     transport:
         - rail
         - water
@@ -23,10 +30,14 @@ paint:
 
 steel:
     name: Steel
+    wikipedia: Steel
+    cite:
+        - state of ohio rail plan
     transport:
         - rail
 
 recycled steel:
     name: Recyled Steel
+    wikipedia: "Steel#Recycling"
     transport:
         - road

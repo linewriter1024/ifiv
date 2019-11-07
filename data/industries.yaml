@@ -5,6 +5,8 @@ coal mine:
 
 coke plant:
     name: Coke Plant
+    cite:
+        - about steel
     inputs:
         - coal
     outputs:
@@ -20,6 +22,9 @@ construction:
 
 iron mine:
     name: Iron Mine
+    wikipedia: "Iron ore#sources"
+    cite:
+        - about steel
     outputs:
         - iron ore
 
@@ -30,6 +35,9 @@ paint plant:
 
 steel mill:
     name: Steel Mill
+    wikipedia: Steel mill
+    cite:
+        - about steel
     inputs:
         - iron ore
         - coke
