@@ -93,9 +93,13 @@ function elemCites(sources) {
 		for(const source of sources.filter((v, i, a) => a.indexOf(v) === i)) {
 			list.append($("<li/>").append(elemCite(source)));
 		}
-		return list;
+		return $("<p/>").append($("<span/>").attr("class", "info-section-header").text("Citations")).append(list);
 	}
 	return $("<span/>");
+}
+
+function flowTransportDesc(flowdata) {
+	return flowdata.transport.map(transport => ydata.transports[transport].name).join(", ").replace(/, ([^,]*)$/, ' and $1');
 }
 
 // Data ready.
@@ -200,11 +204,41 @@ window.onload = function() {
 			// Add industry nodes.
 			for(var industry in ydata.industries) {
 				var idata = ydata.industries[industry];
+
+				idata.suppliers.sort();
+				idata.demanders.sort();
+
+				var inputs = null;
+				var outputs = null;
+				if(idata.suppliers.length > 0) {
+					inputs = $("<ul/>");
+					for(const flow of idata.suppliers) {
+						var flowdata = ydata.flows[flow];
+						inputs.append($("<li/>")
+							.append($("<a/>").attr("href", "#" + nodeIndex("flow", flow)).text(ydata.freight[flowdata.freight].name))
+							.append($("<span/>").text(" from "))
+							.append($("<a/>").attr("href", "#" + nodeIndex("industry", flowdata.supplier)).text(ydata.industries[flowdata.supplier].name))
+						);
+					}
+					inputs = $("<p/>").append($("<span/>").attr("class", "info-section-header").text("Inputs")).append(inputs);
+				}
+				if(idata.demanders.length > 0) {
+					outputs = $("<ul/>");
+					for(const flow of idata.demanders) {
+						var flowdata = ydata.flows[flow];
+						outputs.append($("<li/>")
+							.append($("<a/>").attr("href", "#" + nodeIndex("flow", flow)).text(ydata.freight[flowdata.freight].name))
+							.append($("<span/>").text(" to "))
+							.append($("<a/>").attr("href", "#" + nodeIndex("industry", flowdata.demander)).text(ydata.industries[flowdata.demander].name))
+						);
+					}
+					outputs = $("<p/>").append($("<span/>").attr("class", "info-section-header").text("Outputs")).append(outputs);
+				}
 				graph.addNode(nodeIndex("industry", industry), {
 					index: nodeIndex("industry", industry),
 					text: idata.name,
 					type: "industry",
-					display: $("<div/>").attr("class", "display display-industry").append($("<a/>").attr("href", idata.wikipedia ? ("https://en.wikipedia.org/wiki/" + encodeURI(idata.wikipedia)) : null).attr("class", "display-title").text(idata.name)).append(elemCites(idata.cite || [])),
+					display: $("<div/>").attr("class", "display display-industry").append($("<a/>").attr("href", idata.wikipedia ? ("https://en.wikipedia.org/wiki/" + encodeURI(idata.wikipedia)) : null).attr("class", "display-title").text(idata.name)).append(inputs).append(outputs).append(elemCites(idata.cite || [])),
 				});
 			}
 
@@ -218,11 +252,12 @@ window.onload = function() {
 					type: "flow",
 					display: $("<div/>").attr("class", "display display-flow").append($("<a/>").attr("href", freightdata.wikipedia ? ("https://en.wikipedia.org/wiki/" + encodeURI(freightdata.wikipedia)) : null).attr("class", "display-title").text(freightdata.name))
 						.append($("<p/>")
+							.append($("<span/>").text("From "))
 							.append($("<a/>").text(ydata.industries[flowdata.supplier].name).attr("href", "#" + nodeIndex("industry", flowdata.supplier)))
-							.append($("<span/>").text(" ⇉ "))
+							.append($("<span/>").text(" to "))
 							.append($("<a/>").text(ydata.industries[flowdata.demander].name).attr("href", "#" + nodeIndex("industry", flowdata.demander)))
 						)
-						.append($("<p/>").text("Transported by: " + flowdata.transport.map(transport => ydata.transports[transport].name).join(", ").replace(/, ([^,]*)$/, ' and $1')))
+						.append($("<p/>").text("Transported by: " + flowTransportDesc(flowdata)))
 						.append(elemCites(flowdata.cite || [])),
 				});
 

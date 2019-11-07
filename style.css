@@ -40,3 +40,8 @@ a.button {
 .citelist {
 	font-size: 0.9em;
 }
+
+.info-section-header {
+	font-size: 0.9em;
+	font-weight: bold;
+}
