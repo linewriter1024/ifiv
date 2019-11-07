@@ -72,7 +72,7 @@ window.onhashchange = function() {
 }
 
 $(document).on($.modal.CLOSE, function() {
-	window.history.back();
+	window.location.hash = "";
 });
 
 function elemCite(source) {
