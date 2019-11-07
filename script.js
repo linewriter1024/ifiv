@@ -55,10 +55,14 @@ function nodeIndex(type, name) {
 
 var nodes = {};
 
+var changingHash = false;
+
 window.onhashchange = function() {
 	var index = decodeURI(window.location.hash.split("#")[1] || "");
 	// Reset dialog.
+	changingHash = true;
 	$.modal.close();
+	changingHash = false;
 	$("#nodeinfo").empty();
 	if(index in nodes) {
 		var node = nodes[index];
@@ -72,7 +76,9 @@ window.onhashchange = function() {
 }
 
 $(document).on($.modal.CLOSE, function() {
-	window.location.hash = "";
+	if(!changingHash) {
+		window.location.hash = "";
+	}
 });
 
 function elemCite(source) {
@@ -155,6 +161,11 @@ window.onload = function() {
 				linkUI.attr("d", "M" + finalFrom.x + "," + finalFrom.y + "L" + finalTo.x + "," + finalTo.y);
 			});
 
+			for(var industry in ydata.industries) {
+				ydata.industries[industry].demanders = ydata.industries[industry].demanders || [];
+				ydata.industries[industry].suppliers = ydata.industries[industry].suppliers || [];
+			}
+
 			// Construct and finalize all flow data.
 			// For all possible suppliers...
 			for(var supplier in ydata.industries) {
@@ -177,6 +188,10 @@ window.onload = function() {
 
 							// Combined citation from freight and flow.
 							ydata.flows[index].cite = (ydata.freight[freight].cite || []).concat(ydata.flows[index].cite || []);
+
+							// Modify industry data.
+							ydata.industries[supplier].demanders.push(index);
+							ydata.industries[demander].suppliers.push(index);
 						}
 					}
 				}
@@ -189,7 +204,7 @@ window.onload = function() {
 					index: nodeIndex("industry", industry),
 					text: idata.name,
 					type: "industry",
-					display: $("<div/>").attr("class", "display display-industry").append($("<span/>").attr("class", "display-title").text(idata.name)).append(elemCites(idata.cite || [])),
+					display: $("<div/>").attr("class", "display display-industry").append($("<a/>").attr("href", idata.wikipedia ? ("https://en.wikipedia.org/wiki/" + encodeURI(idata.wikipedia)) : null).attr("class", "display-title").text(idata.name)).append(elemCites(idata.cite || [])),
 				});
 			}
 
@@ -201,11 +216,18 @@ window.onload = function() {
 					index: nodeIndex("flow", flow),
 					text: freightdata.name,
 					type: "flow",
-					display: $("<div/>").attr("class", "display display-flow").append($("<span/>").attr("class", "display-title").text(freightdata.name)).append(elemCites(flowdata.cite || [])),
+					display: $("<div/>").attr("class", "display display-flow").append($("<a/>").attr("href", freightdata.wikipedia ? ("https://en.wikipedia.org/wiki/" + encodeURI(freightdata.wikipedia)) : null).attr("class", "display-title").text(freightdata.name))
+						.append($("<p/>")
+							.append($("<a/>").text(ydata.industries[flowdata.supplier].name).attr("href", "#" + nodeIndex("industry", flowdata.supplier)))
+							.append($("<span/>").text(" ⇉ "))
+							.append($("<a/>").text(ydata.industries[flowdata.demander].name).attr("href", "#" + nodeIndex("industry", flowdata.demander)))
+						)
+						.append($("<p/>").text("Transported by: " + flowdata.transport.map(transport => ydata.transports[transport].name).join(", ").replace(/, ([^,]*)$/, ' and $1')))
+						.append(elemCites(flowdata.cite || [])),
 				});
 
-				graph.addLink(nodeIndex("industry", ydata.flows[flow].supplier), nodeIndex("flow", flow));
-				graph.addLink(nodeIndex("flow", flow), nodeIndex("industry", ydata.flows[flow].demander));
+				graph.addLink(nodeIndex("industry", flowdata.supplier), nodeIndex("flow", flow));
+				graph.addLink(nodeIndex("flow", flow), nodeIndex("industry", flowdata.demander));
 			}
 
 			var renderer = Viva.Graph.View.renderer(graph, {

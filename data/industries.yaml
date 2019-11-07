@@ -22,7 +22,7 @@ construction:
 
 iron mine:
     name: Iron Mine
-    wikipedia: "Iron ore#sources"
+    wikipedia: "Iron ore#Sources"
     cite:
         - about steel
     outputs:
