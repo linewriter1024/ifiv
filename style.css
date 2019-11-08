@@ -6,6 +6,12 @@ html, body, svg, #container {
 	overflow: hidden;
 }
 
+.modal {
+	max-width: 40%;
+	min-width: 20%;
+	width: auto;
+}
+
 header {
 	position: absolute;
 	right: 0;

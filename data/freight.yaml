@@ -47,7 +47,7 @@ paint:
 # Using PET abbreviation for index.
 PET:
     name: Polyethylene Terephthalate
-    blurb: \"PET\" is a plastic used to create products such as water bottles.
+    blurb: Polyethylene Terephthalate (PET) is a plastic used to create products such as water bottles.
     wikipedia: Polyethylene terephthalate
     cite:
         - plastic bottle manufacturing
