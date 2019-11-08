@@ -277,6 +277,7 @@ window.onload = function() {
 
 			var renderer = Viva.Graph.View.renderer(graph, {
 				graphics: graphics,
+				container: $("#container")[0],
 				layout: Viva.Graph.Layout.forceDirected(graph, {
 					springLength: 100,
 					springCoeff: 0.0002,
@@ -286,14 +287,16 @@ window.onload = function() {
 			renderer.run();
 
 			// Append statistics about the data to the about modal.
-			$("#about").append($("<p/>").text("Statistics: " +
-				[
-					Object.keys(ydata.industries).length + " industries",
-					Object.keys(ydata.freight).length + " cargoes",
-					Object.keys(ydata.flows).length + " connections",
-					Object.keys(ydata.sources).length + " references",
-				].join(", ").replace(/, ([^,]*)$/, ', and $1')
-			));
+			$("#about")
+				.append($("<p/>").text("Statistics: " +
+					[
+						Object.keys(ydata.industries).length + " industries",
+						Object.keys(ydata.freight).length + " cargoes",
+						Object.keys(ydata.flows).length + " connections",
+						Object.keys(ydata.sources).length + " references",
+					].join(", ").replace(/, ([^,]*)$/, ', and $1')
+				))
+				.append(elemCites(Object.keys(ydata.sources)));
 
 			// Activate hash system on page (re-)load.
 			if(window.location.hash) {

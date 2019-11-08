@@ -1,3 +1,13 @@
+bottled water:
+    name: Bottled Water
+    blurb: Packaged and potable water.
+    wikipedia: Bottled water
+
+clean water:
+    name: Clean Water
+    blurb: Water fit for drinking.
+    wikipedia: Potable water
+
 coal:
     name: Coal
     blurb: Coal is a energy-rich material found underground. It was formed from the decomposition of ancient vegetation.
@@ -33,6 +43,22 @@ iron ore:
 
 paint:
     name: Paint
+
+# Using PET abbreviation for index.
+PET:
+    name: Polyethylene Terephthalate
+    blurb: \"PET\" is a plastic used to create products such as water bottles.
+    wikipedia: Polyethylene terephthalate
+    cite:
+        - plastic bottle manufacturing
+        - PET process
+
+plastic bottles:
+    name: Plastic Bottles
+    blurb: Plastic bottles are extremely common. One well-known use is to package water.
+    wikipedia: Plastic bottles
+    cite:
+        - plastic bottle manufacturing
 
 steel:
     name: Steel

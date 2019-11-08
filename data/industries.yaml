@@ -50,6 +50,35 @@ paint plant:
     outputs:
         - paint
 
+PET plant:
+    name: PET Plant
+    blurb: Polyethylene Terephthalate (PET) is produced in PET plants.
+    wikipedia: "Polyethylene terephthalate#Production"
+    outputs:
+        - PET
+    cite:
+        - PET process
+
+plastic bottle manufacturer:
+    name: Plastic Bottle Manufacturer
+    blurb: Plastic bottles are molded and produced from PET.
+    wikipedia: "Plastic bottle#Production"
+    cite:
+        - plastic bottle manufacturing
+    inputs:
+        - PET
+    outputs:
+        - plastic bottles
+
+retail:
+    name: Retail
+    blurb: Consumers can purchase products from retailers.
+    wikipedia: Retail
+    inputs:
+        - bottled water
+        - steel
+        - paint
+
 steel mill:
     name: Steel Mill
     blurb: Steel mills convert iron ore to usable steel. They may also recycle scrap steel.
@@ -62,3 +91,20 @@ steel mill:
         - recycled steel
     outputs:
         - steel
+
+water bottler:
+    name: Water bottler
+    blurb: An industry where water is bottled.
+    wikipedia: "Bottled water#Markets"
+    inputs:
+        - clean water
+        - plastic bottles
+    outputs:
+        - bottled water
+
+water spring:
+    name: Water Spring
+    blurb: Drinking water can be extracted from natural springs.
+    wikipedia: Water spring
+    outputs:
+        - clean water
