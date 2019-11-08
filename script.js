@@ -115,7 +115,7 @@ window.onload = function() {
 			var graphics = Viva.Graph.View.svgGraphics();
 			graphics.node(function(node) {
 				var text = Viva.Graph.svg("text")
-					.text(node.data.text)
+					.text(node.data.text + (node.data.cites == 0 ? "*" : ""))
 					.attr("class", "node node-" + (node.data.type || "other"))
 					.attr("pointer-events", "visiblePoint");
 				$(text).on("mousedown", function(edown) {
@@ -242,6 +242,7 @@ window.onload = function() {
 					index: nodeIndex("industry", industry),
 					text: idata.name,
 					type: "industry",
+					cites: (idata.cite || []).length,
 					display: $("<div/>").attr("class", "display display-industry")
 						.append($("<a/>").attr("href", idata.wikipedia ? ("https://en.wikipedia.org/wiki/" + encodeURI(idata.wikipedia)) : null).attr("class", "display-title").text(idata.name))
 						.append(idata.blurb ? $("<p/>").text(idata.blurb).linkify() : null)
@@ -260,6 +261,7 @@ window.onload = function() {
 					index: nodeIndex("flow", flow),
 					text: freightdata.name,
 					type: "flow",
+					cites: (flowdata.cite || []).length,
 					display: $("<div/>").attr("class", "display display-flow").append($("<span/>").text("Freight: ")).append($("<a/>").attr("href", freightdata.wikipedia ? ("https://en.wikipedia.org/wiki/" + encodeURI(freightdata.wikipedia)) : null).attr("class", "display-title").text(freightdata.name))
 						.append(freightdata.blurb ? $("<p/>").text(freightdata.blurb).linkify() : null)
 						.append(freightdata.blurb ? $("<p/>").text(flowdata.blurb).linkify() : null)
