@@ -187,11 +187,11 @@ window.onload = function() {
 								supplier: supplier,
 								demander: demander,
 								// Default transport to value in freight definition.
-								transport: ydata.freight[freight].transport,
+								transport: ydata.freight[freight].transport || [],
 							}, ydata.flows[index] || {});
 
 							// Combined citation from freight and flow.
-							ydata.flows[index].cite = (ydata.freight[freight].cite || []).concat(ydata.flows[index].cite || []);
+							ydata.flows[index].cite = (ydata.freight[freight].cite || []).concat(ydata.flows[index].cite || []).concat(ydata.industries[supplier].cite || []).concat(ydata.industries[demander].cite || []);
 
 							// Modify industry data.
 							ydata.industries[supplier].demanders.push(index);
@@ -202,7 +202,9 @@ window.onload = function() {
 			}
 
 			// Add industry nodes.
-			for(var industry in ydata.industries) {
+			var sortedI = Object.keys(ydata.industries);
+			sortedI.sort();
+			for(const industry of sortedI) {
 				var idata = ydata.industries[industry];
 
 				idata.suppliers.sort();
@@ -247,7 +249,9 @@ window.onload = function() {
 			}
 
 			// Add flow nodes and links.
-			for(var flow in ydata.flows) {
+			var sortedFlows = Object.keys(ydata.flows);
+			sortedFlows.sort();
+			for(const flow of sortedFlows) {
 				var flowdata = ydata.flows[flow];
 				var freightdata = ydata.freight[flowdata.freight];
 				graph.addNode(nodeIndex("flow", flow), {
@@ -263,7 +267,7 @@ window.onload = function() {
 							.append($("<span/>").text(" to "))
 							.append($("<a/>").text(ydata.industries[flowdata.demander].name).attr("href", "#" + nodeIndex("industry", flowdata.demander)))
 						)
-						.append($("<p/>").text("Transported by: " + flowTransportDesc(flowdata)))
+						.append(flowdata.transport.length > 0 ? $("<p/>").text("Transported by: " + flowTransportDesc(flowdata)) : null)
 						.append(elemCites(flowdata.cite || [])),
 				});
 
@@ -281,10 +285,11 @@ window.onload = function() {
 			});
 			renderer.run();
 
+			// Append statistics about the data to the about modal.
 			$("#about").append($("<p/>").text("Statistics: " +
 				[
 					Object.keys(ydata.industries).length + " industries",
-					Object.keys(ydata.freight).length + " freight types",
+					Object.keys(ydata.freight).length + " cargoes",
 					Object.keys(ydata.flows).length + " connections",
 					Object.keys(ydata.sources).length + " references",
 				].join(", ").replace(/, ([^,]*)$/, ', and $1')

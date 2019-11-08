@@ -7,6 +7,15 @@ coal mine:
     outputs:
         - coal
 
+coal power plant:
+    name: Coal Power Plant
+    blurb: Some power plants burn coal as fuel to generate electricity.
+    wikipedia: Coal-fired power station
+    inputs:
+        - coal
+    cite:
+        - coal and electricity
+
 coke plant:
     name: Coke Battery
     blurb: An array of ovens that remove impurities from coal to produce coke.
@@ -20,7 +29,7 @@ coke plant:
 
 construction:
     name: Construction
-    blurb: Construction projects of various kinds require various materials. Old construction may be dismantled and some materials recycled.
+    blurb: Construction projects require various materials. Constructions may later be dismantled and some materials recycled.
     wikipedia: Construction
     inputs:
         - paint

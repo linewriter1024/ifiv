@@ -1,6 +1,6 @@
 coal:
     name: Coal
-    blurb: Coal is a energy-rich material found underground. It was produced from the decomposition of ancient vegetation.
+    blurb: Coal is a energy-rich material found underground. It was formed from the decomposition of ancient vegetation.
     wikipedia: Coal
     cite:
         - how is steel produced
@@ -33,15 +33,14 @@ iron ore:
 
 paint:
     name: Paint
-    transport:
-        - road
 
 steel:
     name: Steel
-    blurb: Steel is an extremely common material, used in all manner of manufacturing and construction.
+    blurb: Steel is an extremely common metal alloy with many applications.
     wikipedia: Steel
     cite:
         - state of ohio rail plan
+        - about steel
     transport:
         - rail
 
@@ -51,5 +50,3 @@ recycled steel:
     cite:
         - about steel
     wikipedia: "Steel#Recycling"
-    transport:
-        - road
