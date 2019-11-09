@@ -286,7 +286,7 @@ window.onload = function() {
 				layout: Viva.Graph.Layout.forceDirected(graph, {
 					springLength: 100,
 					springCoeff: 0.0002,
-					gravity: -5,
+					gravity: -10,
 				}),
 			});
 			renderer.run();
