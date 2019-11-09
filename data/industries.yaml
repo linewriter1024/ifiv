@@ -31,6 +31,7 @@ construction:
     name: Construction
     blurb: Construction projects require various materials. Constructions may later be dismantled and some materials recycled.
     wikipedia: Construction
+    major: yes
     inputs:
         - paint
         - steel
@@ -44,6 +45,18 @@ iron mine:
         - about steel
     outputs:
         - iron ore
+
+material recovery facility:
+    name: Material recovery facility
+    blurb: Material recovery facilities organize materials for recycling.
+    wikipedia: Material recovery facility
+    major: yes
+    cite:
+        - what is a material recovery center and how does it work
+        - recycling PET
+    outputs:
+        - PET
+        - recycled steel
 
 paint plant:
     name: Paint Plant
@@ -61,7 +74,7 @@ PET plant:
 
 plastic bottle manufacturer:
     name: Plastic Bottle Manufacturer
-    blurb: Plastic bottles are molded and produced from PET.
+    blurb: Plastic bottles are molded and produced from plastic. Water bottles are produced from PET.
     wikipedia: "Plastic bottle#Production"
     cite:
         - plastic bottle manufacturing
@@ -74,9 +87,9 @@ retail:
     name: Retail
     blurb: Consumers can purchase products from retailers.
     wikipedia: Retail
+    major: yes
     inputs:
         - bottled water
-        - steel
         - paint
 
 steel mill:

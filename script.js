@@ -82,7 +82,7 @@ $(document).on($.modal.CLOSE, function() {
 });
 
 function elemCite(source) {
-	return $("<cite/>").text(ydata.sources[source].cite).linkify();
+	return $("<cite/>").html(ydata.sources[source].cite).linkify();
 }
 
 function elemCites(sources) {
@@ -116,7 +116,7 @@ window.onload = function() {
 			graphics.node(function(node) {
 				var text = Viva.Graph.svg("text")
 					.text(node.data.text + (node.data.cites == 0 ? "*" : ""))
-					.attr("class", "node node-" + (node.data.type || "other"))
+					.attr("class", "node node-" + (node.data.type || "other") + " " + (node.data.major ? "node-major" : ""))
 					.attr("pointer-events", "visiblePoint");
 				$(text).on("mousedown", function(edown) {
 					$(text).on("mouseup mousemove", function handler(eup) {
@@ -242,6 +242,7 @@ window.onload = function() {
 					index: nodeIndex("industry", industry),
 					text: idata.name,
 					type: "industry",
+					major: idata.major,
 					cites: (idata.cite || []).length,
 					display: $("<div/>").attr("class", "display display-industry")
 						.append($("<a/>").attr("href", idata.wikipedia ? ("https://en.wikipedia.org/wiki/" + encodeURI(idata.wikipedia)) : null).attr("class", "display-title").text(idata.name))

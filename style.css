@@ -39,8 +39,16 @@ a.button {
 	font-style: italic;
 }
 
+.node-major {
+	font-variant: small-caps;
+}
+
 .display-title {
 	font-weight: bold;
+}
+
+cite {
+	font-style: normal;
 }
 
 .citelist {
