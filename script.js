@@ -263,7 +263,7 @@ window.onload = function() {
 					text: freightdata.name,
 					type: "flow",
 					cites: (flowdata.cite || []).length,
-					display: $("<div/>").attr("class", "display display-flow").append($("<span/>").text("Freight: ")).append($("<a/>").attr("href", freightdata.wikipedia ? ("https://en.wikipedia.org/wiki/" + encodeURI(freightdata.wikipedia)) : null).attr("class", "display-title").text(freightdata.name))
+					display: $("<div/>").attr("class", "display display-flow").append($("<span/>").text("Product: ")).append($("<a/>").attr("href", freightdata.wikipedia ? ("https://en.wikipedia.org/wiki/" + encodeURI(freightdata.wikipedia)) : null).attr("class", "display-title").text(freightdata.name))
 						.append(freightdata.blurb ? $("<p/>").text(freightdata.blurb).linkify() : null)
 						.append(freightdata.blurb ? $("<p/>").text(flowdata.blurb).linkify() : null)
 						.append($("<p/>")

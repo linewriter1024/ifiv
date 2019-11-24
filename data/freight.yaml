@@ -30,6 +30,13 @@ coke:
         - rail
         - water
 
+EG:
+    name: Ethylene Glycol
+    blurb: Ethylene glycol is a raw material used to produce plastic such as PET.
+    wikipedia: Ethylene Glycol
+    cite:
+        - EG process
+
 iron ore:
     name: Iron Ore
     blurb: Iron ore is a metal found in earth's crust. It is primarily used in steel-making.
@@ -44,13 +51,20 @@ iron ore:
 paint:
     name: Paint
 
-# Using PET abbreviation for index.
 PET:
     name: Polyethylene Terephthalate
     blurb: Polyethylene Terephthalate (PET) is a plastic used to create products such as water bottles.
     wikipedia: Polyethylene terephthalate
     cite:
         - plastic bottle manufacturing
+        - PET process
+
+PTA:
+    name: Purified Terephthalic Acid
+    blurb: Purified Terephthalic Acid (PTA) is a raw material used to produce plastic such as PET.
+    wikipedia: Purified terephthalic acid
+    cite:
+        - PTA process
         - PET process
 
 plastic bottles:

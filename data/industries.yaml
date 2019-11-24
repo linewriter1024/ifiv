@@ -38,6 +38,17 @@ construction:
     outputs:
         - recycled steel
 
+EG plant:
+    name: EG Plant
+    blurb: Ethylene glycol (EG) is produced in EG plants using various methods, one of which incorporates coal.
+    wikipedia: "Ethylene glycol#Synthesis"
+    inputs:
+        - coal
+    outputs:
+        - EG
+    cite:
+        - EG process
+
 iron mine:
     name: Iron Mine
     wikipedia: "Iron ore#Sources"
@@ -67,10 +78,22 @@ PET plant:
     name: PET Plant
     blurb: Polyethylene Terephthalate (PET) is produced in PET plants.
     wikipedia: "Polyethylene terephthalate#Production"
+    inputs:
+        - PTA
+        - EG
     outputs:
         - PET
     cite:
         - PET process
+
+PTA plant:
+    name: PTA Plant
+    blurb: Purified Terephthalic Acid (PTA) is produced in PTA plants.
+    wikipedia: "Purified terephthalic acid#Synthesis"
+    outputs:
+        - PTA
+    cite:
+        - PTA process
 
 plastic bottle manufacturer:
     name: Plastic Bottle Manufacturer
