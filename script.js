@@ -118,12 +118,12 @@ window.onload = function() {
 					.text(node.data.text + (node.data.cites == 0 ? "*" : ""))
 					.attr("class", "node node-" + (node.data.type || "other") + " " + (node.data.major ? "node-major" : ""))
 					.attr("pointer-events", "visiblePoint");
-				$(text).on("mousedown", function(edown) {
-					$(text).on("mouseup mousemove", function handler(eup) {
-						if (eup.type === "mouseup" && Math.abs(edown.pageX - eup.pageX) < 5 && Math.abs(edown.pageY - eup.pageY) < 5) {
+				$(text).on("mousedown touchstart", function(edown) {
+					$(text).on("mouseup mousemove touchend touchmove", function handler(eup) {
+						if ((eup.type === "mouseup" || eup.type === "touchend") && Math.abs(edown.pageX - eup.pageX) < 5 && Math.abs(edown.pageY - eup.pageY) < 5) {
 							window.location.hash = "#" + node.data.index;
 						}
-						$(text).off("mouseup mousemove", handler);
+						$(text).off("mouseup mousemove touchend touchmove", handler);
 					});
 				});
 				nodes[node.data.index] = node;
