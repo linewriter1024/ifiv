@@ -149,3 +149,8 @@ water:
     name: Water
     blurb: A basic chemical necessary for a tremendous number of processes, including life.
     wikipedia: Water
+    transport:
+        - pipeline
+        - road
+    cite:
+        - water travel
