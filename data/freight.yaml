@@ -1,3 +1,8 @@
+acetic acid:
+    name: Acetic Acid
+    blurb: An organic acid used in many chemical applications including vinegar.
+    wikipedia: Acetic acid
+
 bottled water:
     name: Bottled Water
     blurb: Packaged and potable water.
@@ -37,6 +42,16 @@ EG:
     cite:
         - EG process
 
+ethylene:
+    name: Ethylene
+    blurb: Ethylene is a basic organic material.
+    wikipedia: Ethylene
+
+ilmenite:
+    name: Ilmenite
+    blurb: Ilmenite is the primary source of Titanium dioxide.
+    wikipedia: Ilmenite
+
 iron ore:
     name: Iron Ore
     blurb: Iron ore is a metal found in earth's crust. It is primarily used in steel-making.
@@ -50,13 +65,15 @@ iron ore:
 
 naphtha:
     name: Naphtha
-    blurb: Naphtha is an flamamble organic material produced from oil.
+    blurb: Naphtha is an kind of flamamble organic material produced from oil.
     wikipedia: Naphtha
     cite:
         - naphtha market
 
 paint:
     name: Paint
+    blurb: A material used to give color to other things.
+    wikipedia: Paint
 
 PET:
     name: Polyethylene Terephthalate
@@ -84,9 +101,14 @@ PTA:
         - PTA process
         - PET process
 
+PVA:
+    name: Polyvinyl Acetate
+    blurb: Polyvinyl Acetate (PVA) is a sticky glue that can be used to hold things such as paint together.
+    wikipedia: Polyvinyl acetate
+
 p-xylene:
     name: p-Xylene
-    blurb: p-Xylene is a basic chemical used in the production of Terephthalic Acid.
+    blurb: p-Xylene (para-Xylene or PX) is a basic chemical used in the production of Terephthalic Acid.
     wikipedia: p-Xylene
 
 plastic bottles:
@@ -106,6 +128,11 @@ steel:
     transport:
         - rail
 
+titanium dioxide:
+    name: Titanium dioxide
+    blurb: An oxide of Titanium. It can be used as a white pigment in paint.
+    wikipedia: Titanium dioxide
+
 recycled steel:
     name: Recyled Steel
     blurb: Old steel can be taken, scrapped, and recycled within steel mills. This process is very efficient.
@@ -113,6 +140,12 @@ recycled steel:
         - about steel
     wikipedia: "Steel#Recycling"
 
+VA:
+    name: Vinyl Acetate
+    blurb: Vinyl Acetate is a precursor to glue.
+    wikipedia: Vinyl acetate
+
 water:
     name: Water
+    blurb: A basic chemical necessary for a tremendous number of processes, including life.
     wikipedia: Water

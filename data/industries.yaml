@@ -1,3 +1,12 @@
+acetic acid plant:
+    name: Acetic Acid Plant
+    blurb: A facility producing acetic acid from methanol and carbon monoxide.
+    wikipedia: "Acetic acid#Production"
+    outputs:
+        - acetic acid
+    cite:
+        - acetic acid production
+
 coal mine:
     name: Coal Mine
     blurb: A setup to extract coal from the ground. It may be a mine positioned on the surface or extending deep underground.
@@ -50,6 +59,15 @@ EG plant:
     cite:
         - EG process
 
+ilmenite mine:
+    name: Ilmenite Mine
+    blurb: An ilmenite extraction operation.
+    wikipedia: "Ilmenite#Processing_and_consumption"
+    outputs:
+        - ilmenite
+    cite:
+        - mineral sands
+
 iron mine:
     name: Iron Mine
     wikipedia: "Iron ore#Sources"
@@ -69,6 +87,19 @@ material recovery facility:
     outputs:
         - PET
         - recycled steel
+
+naphtha cracker:
+    name: Naphtha Processor
+    blurb: A plant cracking naphtha into various materials.
+    wikipedia: Naphtha
+    inputs:
+        - naphtha
+    outputs:
+        - p-xylene
+        - ethylene
+    cite:
+        - PX process
+        - naphtha market
 
 oil refinery:
     name: Oil Refinery
@@ -94,8 +125,15 @@ oil well:
 
 paint plant:
     name: Paint Plant
+    blurb: Many materials are mixed into paint using various production methods. One such method uses water as a carrier.
     outputs:
         - paint
+    inputs:
+        - water
+        - titanium dioxide
+        - PVA
+    cite:
+        - what is paint
 
 PET plant:
     name: PET Plant
@@ -120,18 +158,6 @@ PTA plant:
     cite:
         - PTA process
 
-PX plant:
-    name: p-Xylene Plant
-    blurb: A plant cracking naphtha into p-xylene.
-    wikpedia: "p-Xylene#Production"
-    inputs:
-        - naphtha
-    outputs:
-        - p-xylene
-    cite:
-        - PX process
-        - naphtha market
-
 plastic bottle manufacturer:
     name: Plastic Bottle Manufacturer
     blurb: Plastic bottles are molded and produced from plastic. Water bottles are produced from PET.
@@ -142,6 +168,17 @@ plastic bottle manufacturer:
         - PET
     outputs:
         - plastic bottles
+
+PVA polymerizer:
+    name: PVA Polymerizer
+    blurb: A facility transforming vinyl acetate into polyvinyl acetate (PVA).
+    wikipedia: "Polyvinyl acetate#Preparation"
+    inputs:
+        - VA
+    outputs:
+        - PVA
+    cite:
+        - PVA
 
 retail:
     name: Retail
@@ -165,9 +202,32 @@ steel mill:
     outputs:
         - steel
 
+titanium dioxide plant:
+    name: Titanium Dioxide Plant
+    blurb: A facility that processes raw ilmenite into titanium dioxide.
+    wikipedia: "Titanium_dioxide#Production"
+    inputs:
+        - ilmenite
+    outputs:
+        - titanium dioxide
+    cite:
+        - mineral sands
+
+VA plant:
+    name: Vinyl acetate plant
+    blurb: Where vinyl acetate is produced from ethylene and acetic acid.
+    wikipedia: "Vinyl acetate#Preparation"
+    inputs:
+        - ethylene
+        - acetic acid
+    outputs:
+        - VA
+    cite:
+        - VA production
+
 water bottler:
     name: Water bottler
-    blurb: An industry where water is cleaned and bottled. Water comes from many sources, including natural springs.
+    blurb: An industry where water is cleaned and bottled.
     wikipedia: "Bottled water#Markets"
     inputs:
         - water
@@ -177,10 +237,10 @@ water bottler:
     cite:
         - water bottling plant process and solutions
 
-water spring:
-    name: Natural Water Spring
-    blurb: Drinking water can be extracted from natural springs.
-    wikipedia: Water spring
+water sources:
+    name: Water Resources
+    blurb: Water can be extracted from sources such as natural springs.
+    wikipedia: Water resources
     outputs:
         - water
     cite:
