@@ -88,7 +88,7 @@ function elemCite(source) {
 function elemCites(sources) {
 	var sources = sources.slice();
 	sources.sort(function(a, b) {
-		return a.toLowerCase().localeCompare(b.toLowerCase());
+		return ydata.sources[a].cite.toLowerCase().localeCompare(ydata.sources[b].cite.toLowerCase());
 	});
 	if(sources.length > 0) {
 		var list = $("<ul/>").attr("class", "citelist").hide();
