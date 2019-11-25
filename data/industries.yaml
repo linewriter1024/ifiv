@@ -18,7 +18,7 @@ coal power plant:
 
 coke plant:
     name: Coke Battery
-    blurb: An array of ovens that remove impurities from coal to produce coke.
+    blurb: An array of ovens that remove impurities from coal to produce coke. Coal tar is a by-product.
     cite:
         - about steel
         - how is steel produced
@@ -26,6 +26,7 @@ coke plant:
         - coal
     outputs:
         - coke
+        - coal tar
 
 construction:
     name: Construction
@@ -69,6 +70,28 @@ material recovery facility:
         - PET
         - recycled steel
 
+oil refinery:
+    name: Oil Refinery
+    blurb: A plant that refines oil into various products. Naphtha may be produced from cracking petroleum or distilling coal tar.
+    wikipedia: Oil refinery
+    inputs:
+        - petroleum
+        - coal tar
+    outputs:
+        - naphtha
+    cite:
+        - naphtha market
+
+oil well:
+    name: Oil Well
+    blurb: A kind of installation that extracts oil from the earth.
+    wikipedia: Oil well
+    outputs:
+        - petroleum
+    cite:
+        - how do we get oil and gas out of the ground
+
+
 paint plant:
     name: Paint Plant
     outputs:
@@ -90,10 +113,24 @@ PTA plant:
     name: PTA Plant
     blurb: Purified Terephthalic Acid (PTA) is produced in PTA plants.
     wikipedia: "Purified terephthalic acid#Synthesis"
+    inputs:
+        - p-xylene
     outputs:
         - PTA
     cite:
         - PTA process
+
+PX plant:
+    name: p-Xylene Plant
+    blurb: A plant cracking naphtha into p-xylene.
+    wikpedia: "p-Xylene#Production"
+    inputs:
+        - naphtha
+    outputs:
+        - p-xylene
+    cite:
+        - PX process
+        - naphtha market
 
 plastic bottle manufacturer:
     name: Plastic Bottle Manufacturer
@@ -130,17 +167,21 @@ steel mill:
 
 water bottler:
     name: Water bottler
-    blurb: An industry where water is bottled.
+    blurb: An industry where water is cleaned and bottled. Water comes from many sources, including natural springs.
     wikipedia: "Bottled water#Markets"
     inputs:
-        - clean water
+        - water
         - plastic bottles
     outputs:
         - bottled water
+    cite:
+        - water bottling plant process and solutions
 
 water spring:
-    name: Water Spring
+    name: Natural Water Spring
     blurb: Drinking water can be extracted from natural springs.
     wikipedia: Water spring
     outputs:
-        - clean water
+        - water
+    cite:
+        - springs and the water cycle

@@ -1,6 +1,9 @@
 rail:
     name: Rail
 
+pipeline:
+    name: Pipeline
+
 road:
     name: Road
 

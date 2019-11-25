@@ -3,11 +3,6 @@ bottled water:
     blurb: Packaged and potable water.
     wikipedia: Bottled water
 
-clean water:
-    name: Clean Water
-    blurb: Water fit for drinking.
-    wikipedia: Potable water
-
 coal:
     name: Coal
     blurb: Coal is a energy-rich material found underground. It was formed from the decomposition of ancient vegetation.
@@ -18,6 +13,11 @@ coal:
     transport:
         - rail
         - water
+
+coal tar:
+    name: Coal tar
+    blurb: Coal tar is a liquid by-product of coke production.
+    wikipedia: Coal tar
 
 coke:
     name: Coke
@@ -48,6 +48,13 @@ iron ore:
         - rail
         - water
 
+naphtha:
+    name: Naphtha
+    blurb: Naphtha is an flamamble organic material produced from oil.
+    wikipedia: Naphtha
+    cite:
+        - naphtha market
+
 paint:
     name: Paint
 
@@ -59,6 +66,16 @@ PET:
         - plastic bottle manufacturing
         - PET process
 
+petroleum:
+    name: Petroleum
+    blurb: Petroleum is an energy-rich material found underground. It was formed from the decomposition of ancient life.
+    wikipedia: Petroleum
+    transport:
+        - rail
+        - water
+        - road
+        - pipeline
+
 PTA:
     name: Purified Terephthalic Acid
     blurb: Purified Terephthalic Acid (PTA) is a raw material used to produce plastic such as PET.
@@ -66,6 +83,11 @@ PTA:
     cite:
         - PTA process
         - PET process
+
+p-xylene:
+    name: p-Xylene
+    blurb: p-Xylene is a basic chemical used in the production of Terephthalic Acid.
+    wikipedia: p-Xylene
 
 plastic bottles:
     name: Plastic Bottles
@@ -90,3 +112,7 @@ recycled steel:
     cite:
         - about steel
     wikipedia: "Steel#Recycling"
+
+water:
+    name: Water
+    wikipedia: Water

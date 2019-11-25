@@ -16,6 +16,9 @@ header {
 	position: absolute;
 	right: 0;
 	top: 0;
+}
+
+#about_button {
 	font-size: 2em;
 }
 
